@@ -1,0 +1,1 @@
+google-chrome http://localhost:8003/src/index.html && watch-http-server -p 8003

@@ -1,0 +1,41 @@
+{
+"coord": {
+"lon": 13.33,
+"lat": 52.57
+},
+"weather": [
+{
+"id": 800,
+"main": "Clear",
+"description": "clear sky",
+"icon": "01n"
+}
+],
+"base": "cmc stations",
+"main": {
+"temp": 277.11,
+"pressure": 1013,
+"humidity": 65,
+"temp_min": 276.15,
+"temp_max": 278.15
+},
+"wind": {
+"speed": 2.6,
+"deg": 200
+},
+"clouds": {
+"all": 0
+},
+"dt": 1458852600,
+"sys": {
+"type": 1,
+"id": 4892,
+"message": 0.0094,
+"country": "DE",
+"sunrise": 1458795421,
+"sunset": 1458840547
+},
+"id": 2848756,
+"name": "Berlin Reinickendorf",
+"cod": 200
+}
