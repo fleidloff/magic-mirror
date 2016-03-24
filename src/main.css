@@ -1,0 +1,29 @@
+body {
+  background: black;
+}
+
+.row {
+  margin: 10px;
+  display: flex;
+}
+
+.row:first-child {
+  align-items: flex-start;
+}
+.row:last-child {
+  align-items: flex-end;
+}
+
+.col:last-child {
+  text-align: right;
+}
+
+.widget {
+  font-size: 25px;
+}
+
+.bottom {
+  position: absolute; 
+  bottom: 0; 
+  width: 100%;
+}

@@ -2,18 +2,20 @@
 <html>
   <head>
     <title>magic mirror</title>
-    <script src="vendor/notify.js"></script>
+
+    <link rel="stylesheet" href="vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+
     <script src="vendor/traceur.js"></script>
     <script src="vendor/es6-module-loader.js"></script>
+    <script src="vendor/markdown.js"></script>
 
-    <script type="module">
-      import main from "js/app.js";
-      notify.when("page.ready").then(main);
-    </script>
   </head>
   <body>
-    <script>
-      notify.that("page.ready", {});
+    <script type="module">
+      import main from "js/app.js";
+      main();
     </script>
   </body>
 </html>

@@ -4,7 +4,7 @@ export default function register(name, render) {
         HTMLElement.prototype, {
         createdCallback: {
           value: function() {
-            const props = JSON.parse(this.getAttribute("props") || "{}");
+            const props = deProps(this.getAttribute("props") || "{}");
             this.innerHTML = render(props);
           }},
           detachedCallback: {value: function() {
@@ -24,6 +24,10 @@ export function props(p) {
       return JSON.stringify(this);
     }
   });
+}
+
+export function deProps(p) {
+  return JSON.parse(p);
 }
 
 export function render(element, html) {
