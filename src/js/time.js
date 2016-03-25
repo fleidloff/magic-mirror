@@ -1,9 +1,7 @@
 export default {
   every(when, cb, ...params) {
     const i = setInterval(() => {
-      cb(...params).catch(() => {
-        clearInterval(i); 
-      });
+      cb(...params);
     }, when);
     return cb(...params);
   },
