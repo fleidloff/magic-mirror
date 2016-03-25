@@ -1,7 +1,7 @@
 import register, { render, props as p } from "js/stupidComponent.js";
 
 register("s-notes", ({ notes }) => `
-  <div>${markdown.toHTML(notes.split("____").join(" "))}</div>
+  <div>${markdown.toHTML(notes)}</div>
 `);
 
 export function getFroodleNotes() {
@@ -11,7 +11,7 @@ export function getFroodleNotes() {
 }
 
 function mapNotes(json) {
-  return json.froodle.split(" ").join("____");
+  return json.froodle;
 }
 
 

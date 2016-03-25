@@ -21,13 +21,13 @@ export default function register(name, render) {
 export function props(p) {
   return Object.assign({}, p, {
     toString() {
-      return JSON.stringify(this);
+      return JSON.stringify(this).split(" ").join("___");
     }
   });
 }
 
 export function deProps(p) {
-  return JSON.parse(p);
+  return JSON.parse(p.split("___").join(" "));
 }
 
 export function render(element, html) {

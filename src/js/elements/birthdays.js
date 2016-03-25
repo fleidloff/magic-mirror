@@ -1,17 +1,12 @@
 import register, { render, props as p } from "js/stupidComponent.js";
 
 register("s-birthdays", ({ birthdays }) => `
-  <div>${markdown.toHTML(birthdays.split("____").join(" "))}</div>
+  <div>${markdown.toHTML(birthdays)}</div>
 `);
 
 export function getFroodleBirthdays() {
   return fetch(getUrl())
-    .then(res => res.text())
-    .then(mapBirthdays);
-}
-
-function mapBirthdays(text) {
-  return text.split(" ").join("____");
+    .then(res => res.text());
 }
 
 function getUrl(month) {
