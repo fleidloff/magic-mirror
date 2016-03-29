@@ -1,3 +1,5 @@
+import time from "./time.js";
+
 export default function register(name, render) {
   document.registerElement(name, {
       prototype: Object.create(
@@ -54,11 +56,15 @@ export const Signal = {
       onChange(cb) {
         changeListeners.push(cb);
       },
-      attr: `SIGNAL::${id}` 
+      attr: `SIGNAL::${id}`,
+      every(when, cb, ...params) {
+        time.every(when, cb, this, ...params);
+        return this;
+      }
+
     };
 
     return this.signals[id];
-
   },
   get(maybeSignal) {
     if (!maybeSignal) {

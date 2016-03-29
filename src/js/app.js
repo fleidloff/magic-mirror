@@ -10,53 +10,49 @@ import time from "js/time.js";
 export default function main() {
   render(document.body, `<s-skeleton />`).then(skeleton => {
 
-    const timestampSignal = Signal.create(0);
+    const timestampSignal = Signal.create(0).every(time.second, (signal) => {
+      signal.change(new Date().getTime());
+    });
     render (
       skeleton.oneWithClass("time"), 
-      `<s-time timestamp=${timestampSignal.attr} />`
-    )
-    time.every(time.second, () => {
-      timestampSignal.change(new Date().getTime());
-    });
-
-    const weatherSignal = Signal.create({temp: 0});
-    render (
-      skeleton.oneWithClass("weather"), 
-      `<s-weather weather=${weatherSignal.attr} />`
+      `<s-time timestamp="${timestampSignal.attr}" />`
     );
-    time.every (time.hour, () => {
+
+    const weatherSignal = Signal.create({temp: 0}).every(time.hour, (signal) => {
       return getWeatherData()
         .then(weather => {
-          weatherSignal.change(weather);  
+          signal.change(weather);  
         })
         .catch(ex => console.error("something went wrong", ex));
     });
+    render (
+      skeleton.oneWithClass("weather"), 
+      `<s-weather weather="${weatherSignal.attr}" />`
+    );
 
-    const notesSignal = Signal.create("");
+    const notesSignal = Signal.create("").every (10*time.minute, (signal) => {
+      return getFroodleNotes()
+        .then(notes => {
+          signal.change(notes);
+        })
+        .catch(ex => console.log("something went wrong"));
+    });
     render (
       skeleton.oneWithClass("notes"), 
       `<s-notes notes=${notesSignal.attr} />`
     );
-    time.every (10*time.minute, () => {
-      return getFroodleNotes()
-        .then(notes => {
-          notesSignal.change(notes);
+
+    const birthdaysSignal = Signal.create("").every(time.day, (signal) => {
+      return getFroodleBirthdays(skeleton)
+        .then(birthdays => {
+          signal.change(birthdays);
         })
         .catch(ex => console.log("something went wrong"));
     });
-
-    const birthdaysSignal = Signal.create("");
     render (
       skeleton.oneWithClass("birthdays"), 
       `<s-birthdays birthdays=${birthdaysSignal.attr} />`
     );
-    time.every (time.day, () => {
-      return getFroodleBirthdays(skeleton)
-        .then(birthdays => {
-          birthdaysSignal.change(birthdays);
-        })
-        .catch(ex => console.log("something went wrong"));
-    });
     
   });
 }
