@@ -14,6 +14,7 @@ export default function register(name, render) {
 
               const signal = Signal.get(it.value)
               if (signal.isSignal) {
+                props[it.name] = signal.value;
                 signal.onChange(changedValue => {
                   if (changedValue !== props[it.name]) {
                     props[it.name] = changedValue;

@@ -13,18 +13,20 @@ export default function main() {
     const timestampSignal = Signal.create(0).every(time.second, (signal) => {
       signal.change(new Date().getTime());
     });
+
     render (
       skeleton.oneWithClass("time"), 
       `<s-time timestamp="${timestampSignal.attr}" />`
     );
 
-    const weatherSignal = Signal.create({temp: 0}).every(time.hour, (signal) => {
+    const weatherSignal = Signal.create({temp: 0, sunset: 0, sunrise: 0}).every(time.hour, (signal) => {
       return getWeatherData()
         .then(weather => {
           signal.change(weather);  
         })
         .catch(ex => console.error("something went wrong", ex));
     });
+
     render (
       skeleton.oneWithClass("weather"), 
       `<s-weather weather="${weatherSignal.attr}" />`
@@ -39,7 +41,7 @@ export default function main() {
     });
     render (
       skeleton.oneWithClass("notes"), 
-      `<s-notes notes=${notesSignal.attr} />`
+      `<s-notes notes="${notesSignal.attr}" />`
     );
 
     const birthdaysSignal = Signal.create("").every(time.day, (signal) => {
@@ -51,7 +53,7 @@ export default function main() {
     });
     render (
       skeleton.oneWithClass("birthdays"), 
-      `<s-birthdays birthdays=${birthdaysSignal.attr} />`
+      `<s-birthdays birthdays="${birthdaysSignal.attr}" />`
     );
     
   });
