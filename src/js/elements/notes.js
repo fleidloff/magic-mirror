@@ -1,6 +1,6 @@
 import register, { render, props as p } from "js/stupidComponent.js";
 
-register("s-notes", ({ notes }) => `
+register("s-notes", ({notes}) => `
   <div>${markdown.toHTML(notes)}</div>
 `);
 

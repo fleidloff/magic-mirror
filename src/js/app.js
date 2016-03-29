@@ -10,19 +10,19 @@ import time from "js/time.js";
 export default function main() {
   render(document.body, `<s-skeleton />`).then(skeleton => {
 
-    const timestampSignal = Signal.create({timestamp: 0});
+    const timestampSignal = Signal.create(0);
     render (
       skeleton.oneWithClass("time"), 
-      `<s-time props=${timestampSignal.attr} />`
+      `<s-time timestamp=${timestampSignal.attr} />`
     )
     time.every(time.second, () => {
-      timestampSignal.change({timestamp: new Date().getTime()});
+      timestampSignal.change(new Date().getTime());
     });
 
     const weatherSignal = Signal.create({temp: 0});
     render (
       skeleton.oneWithClass("weather"), 
-      `<s-weather props=${weatherSignal.attr} />`
+      `<s-weather weather=${weatherSignal.attr} />`
     );
     time.every (time.hour, () => {
       return getWeatherData()
@@ -32,28 +32,28 @@ export default function main() {
         .catch(ex => console.error("something went wrong", ex));
     });
 
-    const notesSignal = Signal.create({notes: ""});
+    const notesSignal = Signal.create("");
     render (
       skeleton.oneWithClass("notes"), 
-      `<s-notes props=${notesSignal.attr} />`
+      `<s-notes notes=${notesSignal.attr} />`
     );
     time.every (10*time.minute, () => {
       return getFroodleNotes()
         .then(notes => {
-          notesSignal.change({notes});
+          notesSignal.change(notes);
         })
         .catch(ex => console.log("something went wrong"));
     });
 
-    const birthdaysSignal = Signal.create({birthdays: ""});
+    const birthdaysSignal = Signal.create("");
     render (
       skeleton.oneWithClass("birthdays"), 
-      `<s-birthdays props=${birthdaysSignal.attr} />`
+      `<s-birthdays birthdays=${birthdaysSignal.attr} />`
     );
     time.every (time.day, () => {
       return getFroodleBirthdays(skeleton)
         .then(birthdays => {
-          birthdaysSignal.change({birthdays});
+          birthdaysSignal.change(birthdays);
         })
         .catch(ex => console.log("something went wrong"));
     });

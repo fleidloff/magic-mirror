@@ -4,17 +4,24 @@ export default function register(name, render) {
         HTMLElement.prototype, {
         createdCallback: {
           value: function() {
-            const props = deProps(this.getAttribute("props") || "{}");
-            if (props.isSignal) {
-              const signal = Signal.get(props.id)
-              this.innerHTML = render(signal.value);
-              signal.onChange(value => {
-                // todo: update only if value changed
-                this.innerHTML = render(value);
-              });
-            } else {
-              this.innerHTML = render(props);
-            }
+            const attributes = Array.prototype.slice.call(this.attributes, 0);
+            const props = {};
+
+            attributes.forEach(it => {
+              props[it.name] = it.value;
+
+              const signal = Signal.get(it.value)
+              if (signal) {
+                signal.onChange(changedValue => {
+                  if (changedValue !== props[it.name]) {
+                    props[it.name] = changedValue;
+                    this.innerHTML = render(props);
+                  }
+                });
+              }
+            });
+
+            this.innerHTML = render(props);
           }},
           detachedCallback: {value: function() {
             const childNodes = Array.prototype.slice.call(this.childNodes, 0); 
@@ -27,14 +34,6 @@ export default function register(name, render) {
   );
 }
 
-export function props(p) {
-  return Object.assign({}, p, {
-    toString() {
-      return JSON.stringify(this).split(" ").join("___");
-    }
-  });
-}
-
 export const Signal = {
   counter: 0,
   signals: {},
@@ -44,6 +43,9 @@ export const Signal = {
     this.signals[id] = {
       value,
       change(value) {
+        if (typeof value !== typeof this.value) {
+          throw new TypeError("Signal => types don't match");
+        }
         this.value = value;
         changeListeners.forEach(cb => {
           return cb(value)
@@ -52,25 +54,28 @@ export const Signal = {
       onChange(cb) {
         changeListeners.push(cb);
       },
-      attr: {
-        id,
-        isSignal: true,
-        toString() {
-          return JSON.stringify(this).split(" ").join("___");
-        } 
-      }
+      attr: `SIGNAL::${id}` 
     };
 
     return this.signals[id];
 
   },
-  get(id) {
-    return this.signals[id];
+  get(maybeSignal) {
+    if (!maybeSignal) {
+      return null;
+    }
+    if (typeof maybeSignal.split !== "function") {
+      return null;
+    }
+    const strings = maybeSignal.split("::");
+    if (strings.length === 2 && strings[0] === "SIGNAL") {
+      const s = this.signals[strings[1]];
+      if (typeof s !== "undefined") {
+        return s;
+      }
+    }
+    return null;
   }
-}
-
-export function deProps(p) {
-  return JSON.parse(p.split("___").join(" "));
 }
 
 export function render(element, html) {

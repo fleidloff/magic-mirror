@@ -1,6 +1,6 @@
 import register, { render, props as p } from "js/stupidComponent.js";
 
-register("s-weather", weather => `
+register("s-weather", ({weather}) => `
   <div>Temperatur: ${weather.temp}°C</div>
 `);
 
