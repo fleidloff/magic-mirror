@@ -13,7 +13,7 @@ export default function register(name, render) {
               props[it.name] = it.value;
 
               const signal = Signal.get(it.value)
-              if (signal) {
+              if (signal.isSignal) {
                 signal.onChange(changedValue => {
                   if (changedValue !== props[it.name]) {
                     props[it.name] = changedValue;
@@ -43,6 +43,7 @@ export const Signal = {
     const changeListeners = [];
     const id = this.counter++;
     this.signals[id] = {
+      isSignal: true,
       value,
       change(value) {
         if (typeof value !== typeof this.value) {
@@ -68,19 +69,21 @@ export const Signal = {
   },
   get(maybeSignal) {
     if (!maybeSignal) {
-      return null;
+      return maybeSignal;
     }
     if (typeof maybeSignal.split !== "function") {
-      return null;
+      return maybeSignal;
     }
     const strings = maybeSignal.split("::");
     if (strings.length === 2 && strings[0] === "SIGNAL") {
       const s = this.signals[strings[1]];
       if (typeof s !== "undefined") {
         return s;
+      } else {
+        return { value: "" }
       }
     }
-    return null;
+    return maybeSignal;
   }
 }
 
