@@ -2,8 +2,9 @@ import register, { render, props as p } from "js/stupidComponent.js";
 
 register("s-weather", ({weather}) => `
   <div>Temperatur: ${weather.temp}°C</div>
-  <div><small>in 12 Stunden: ${weather.temp12}°C</small></div>
-  <div><small>in 1 Tag: ${weather.temp24}°C</small></div>
+  <br />
+  <div><small>max: ${weather.tempMax}°C</small></div>
+  <div><small>min: ${weather.tempMin}°C</small></div>
 `);
 
 export function getWeatherData() {
@@ -17,11 +18,22 @@ function kelvinToCelsius(k) {
 }
 
 function mapWeather(json) {
-  // 4 -> in 12; 8 -> in 24
-  console.log(json);
+  const tempNow = json.list[0].main.temp;
+  const temp = {
+    max: tempNow,
+    min: tempNow
+  }
+  json.list.splice(1,8).forEach(t => {
+    if (t.main.temp > temp.max) {
+      temp.max = t.main.temp;
+    } 
+    if (t.main.temp < temp.min) {
+      temp.min = t.main.temp;
+    } 
+  })
   return {
     temp: kelvinToCelsius(json.list[0].main.temp),
-    temp12: kelvinToCelsius(json.list[4].main.temp),
-    temp24: kelvinToCelsius(json.list[8].main.temp)
+    tempMax: kelvinToCelsius(temp.max),
+    tempMin: kelvinToCelsius(temp.min)
   };
 }
