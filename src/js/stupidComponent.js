@@ -52,15 +52,7 @@ const Signal = {
   signals: {},
   create(id, value) {
     const changeListeners = [];
-    let resolve;
-    const resolvedPromise = new Promise(r => {
-      resolve = r;
-    });
-    if (value) {
-      resolve(value);
-    }
     this.signals[id] = {
-      resolve: resolvedPromise,
       isSignal: true,
       value: value || Signal.UNRESOLVED,
       id,
