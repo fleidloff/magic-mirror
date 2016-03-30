@@ -18,7 +18,10 @@ export default function register(name, render) {
                 signal.onChange(changedValue => {
                   if (changedValue !== props[it.name]) {
                     props[it.name] = changedValue;
-                    this.innerHTML = Signal.allResolved(props) ? render(props) : "";
+                    const newHTML = Signal.allResolved(props) ? render(props) : "";
+                    if (newHTML !== this.innerHTML) {
+                      this.innerHTML = newHTML;
+                    }
                   }
                 });
               }

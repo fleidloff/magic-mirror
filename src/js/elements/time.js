@@ -36,5 +36,5 @@ register("s-time", ({ date }) => {
 
   return `
     <div>${dt.date}</div>
-    <div>${dt.time} Uhr</div>
+    <div>${dt.simpleTime} Uhr</div>
 `});

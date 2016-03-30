@@ -6,8 +6,7 @@ register("s-notes", ({notes}) => `
 
 export function getFroodleNotes() {
   return fetch("http://fleidlof.alnilam.uberspace.de/nodejs/froodle/api/v1/Tasks/56f07d98b5dd41487146d4c2.md?shared=true")
-    .then(res => res.json())
-    .then(json => json.froodle);
+    .then(res => res.text())
 }
 
 

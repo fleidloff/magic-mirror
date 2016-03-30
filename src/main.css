@@ -1,5 +1,6 @@
 body {
   background: black;
+  font-family: "Patrick Hand";
 }
 
 .row {
@@ -19,11 +20,17 @@ body {
 }
 
 .widget {
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .bottom {
   position: absolute; 
   bottom: 0; 
   width: 100%;
+}
+
+s-birthdays ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: 20px;
 }
