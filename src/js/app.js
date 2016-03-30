@@ -8,7 +8,7 @@ import time from "js/time.js";
 
 export default function main() {
   const timestampSignal = getSignal("time").every(time.second, (signal) => {
-    signal.set(new Date().getTime());
+    signal.set(new Date());
   });
 
   const weatherSignal = getSignal("weather", {temp: 0, sunset: 0, sunrise: 0}).every(time.hour, (signal) => {
@@ -16,7 +16,7 @@ export default function main() {
       .then(weather => {
         signal.set(weather);  
       })
-      .catch(ex => console.error("something went wrong", ex));
+      .catch(ex => console.error("something went wrong => ", ex));
   });
 
   const notesSignal = getSignal("notes", "").every (10*time.minute, (signal) => {
@@ -24,7 +24,7 @@ export default function main() {
       .then(notes => {
         signal.set(notes);
       })
-      .catch(ex => console.log("something went wrong"));
+      .catch(ex => console.log("something went wrong => ", ex));
   });
 
   const birthdaysSignal = getSignal("birthdays", "").every(time.day, (signal) => {
@@ -32,6 +32,6 @@ export default function main() {
       .then(birthdays => {
         signal.set(birthdays);
       })
-      .catch(ex => console.log("something went wrong"));
+      .catch(ex => console.log("something went wrong => ", ex));
   });
 }

@@ -10,10 +10,6 @@
     <script src="vendor/traceur.js"></script>
     <script src="vendor/es6-module-loader.js"></script>
     <script src="vendor/markdown.js"></script>
-    <script type="module">
-      import main from "js/app.js";
-      main();
-    </script>
   </head>
   <body>
     <div class="g-container">
@@ -22,7 +18,7 @@
           <s-weather weather="SIGNAL::weather" />
         </div>
         <div class="col col-xs-6 widget">
-          <s-time timestamp="SIGNAL::time" />
+          <s-time date="SIGNAL::time" />
         </div>
       </div>
       <div class="bottom">
@@ -36,5 +32,10 @@
         </div>
       </div>
     </div>
+
+    <script type="module">
+      import main from "js/app.js";
+      main();
+    </script>
   </body>
 </html>

@@ -15,8 +15,7 @@ const dayNames = [
 
 const leadingZero = n => n < 10 ? `0${n}` : n;
 
-function timeObject(timestamp) {
-  const date = new Date(timestamp);
+function timeObject(date) {
   const day = date.getDate();
   const weekDayIndex = date.getDay();
   const monthIndex = date.getMonth();
@@ -32,8 +31,8 @@ function timeObject(timestamp) {
   };
 }
 
-register("s-time", ({ timestamp }) => {
-  const dt = timeObject(timestamp);
+register("s-time", ({ date }) => {
+  const dt = timeObject(date);
 
   return `
     <div>${dt.date}</div>
