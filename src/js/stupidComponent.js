@@ -61,7 +61,6 @@ const Signal = {
           throw new TypeError("Signal => types don't match");
         }
         this.value = value;
-        resolve(value);
         changeListeners.forEach(cb => {
           return cb(value)
         });
