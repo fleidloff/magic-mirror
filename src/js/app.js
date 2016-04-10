@@ -1,4 +1,6 @@
 import "js/elements/time.js";
+import "js/elements/list.js";
+import "js/elements/item.js";
 import { getWeatherData } from "js/elements/weather.js";
 import { getFroodleNotes } from "js/elements/notes.js";
 import { getFroodleBirthdays } from "js/elements/birthdays.js";
