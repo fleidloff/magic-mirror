@@ -9,6 +9,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Patrick+Hand' rel='stylesheet' type='text/css'>
 
+    <script src="vendor/custom-element.js"></script>
     <script src="vendor/traceur.js"></script>
     <script src="vendor/es6-module-loader.js"></script>
     <script src="vendor/markdown.js"></script>
@@ -27,6 +28,7 @@
         <div class="row">
           <div class="col col-xs-6 widget">
             <s-list items='["foo","bar"]' item="<s-item item={item} />" />
+            <s-list items='["foo2","bar2"]' item="<s-item item={item} />" />
             <s-birthdays birthdays="SIGNAL::birthdays" />
           </div>
           <div class="col col-xs-6 widget">
