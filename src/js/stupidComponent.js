@@ -26,7 +26,7 @@ export default function register(name, render) {
                 });
               }
             });
-            this.innerHTML = Signal.allResolved(props) ? render(props) : "";
+            this.innerHTML = Signal.allResolved(props) ? render(props) : this.innerHTML;
           }},
           detachedCallback: {value: function() {
             const childNodes = Array.prototype.slice.call(this.childNodes, 0); 

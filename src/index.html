@@ -18,21 +18,20 @@
     <div class="g-container">
       <div class="row">
         <div class="col col-xs-6 widget">
-          <s-weather weather="SIGNAL::weather" />
+          <s-weather weather="SIGNAL::weather">
         </div>
         <div class="col col-xs-6 widget">
-          <s-time date="SIGNAL::time" />
+          <s-time date="SIGNAL::time">
         </div>
       </div>
       <div class="bottom">
         <div class="row">
           <div class="col col-xs-6 widget">
-            <s-list items='["foo","bar"]' item="<s-item item={item} />" />
-            <s-list items='["foo2","bar2"]' item="<s-item item={item} />" />
-            <s-birthdays birthdays="SIGNAL::birthdays" />
+            <s-list items='["foo","bar"]' item="<s-item item={item}></s-item>">dummy</s-list>
+            <s-birthdays birthdays="SIGNAL::birthdays">
           </div>
           <div class="col col-xs-6 widget">
-            <s-notes notes="SIGNAL::notes" />
+            <s-notes notes="SIGNAL::notes">
           </div>
         </div>
       </div>

@@ -1,1 +1,1 @@
-open http://localhost:8003/src/index.html && watch-http-server -p 8003
+xdg-open http://localhost:8003/src/index.html && watch-http-server -p 8003

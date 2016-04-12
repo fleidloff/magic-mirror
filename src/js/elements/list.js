@@ -13,7 +13,7 @@ register("s-list", ({ items, render, item }) => {
   }
   else if (item) {
     return items.map(it => {
-      return `<span>${item.replace("{item}", it)}</span>`;
+      return `${item.replace("{item}", it)}`;
     }).join("");
   }
 
