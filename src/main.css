@@ -34,3 +34,7 @@ s-birthdays ul {
   padding-left: 0;
   font-size: 40px;
 }
+
+*:unresolved {
+  display: none;
+}

@@ -28,7 +28,9 @@
       <div class="bottom">
         <div class="row">
           <div class="col col-xs-6 widget">
-            <s-list items='["foo","bar"]' item="<s-item item={item}></s-item>"></s-list>
+            <s-list items='["foo","bar"]'>
+              <div>{item}</div>
+            </s-list>
             <s-birthdays birthdays="SIGNAL::birthdays">loading birthdays...</s-birthdays>
           </div>
           <div class="col col-xs-6 widget">
