@@ -3,12 +3,15 @@ import time from "./time.js";
 export default function register(name, render) {
   document.registerElement(name, {
       prototype: Object.create(
-        HTMLElement.prototype, {
+        HTMLBRElement.prototype, {
         createdCallback: {
           value: function() {
             const attributes = Array.prototype.slice.call(this.attributes, 0);
             const props = {};
-
+            attributes.push({
+              name: "innerHTML",
+              value: this.innerHTML
+            });
             attributes.forEach(it => {
               props[it.name] = it.value;
 
@@ -87,6 +90,9 @@ const Signal = {
   get(id, value) {
     const s = this.signals[id];
     if (typeof s !== "undefined") {
+      if (value) {
+        s.set(value);
+      }
       return s;
     } else {
       return this.create(id || this.id(), value);

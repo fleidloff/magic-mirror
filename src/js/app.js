@@ -12,7 +12,6 @@ export default function main() {
   const timestampSignal = getSignal("time").every(time.second, (signal) => {
     signal.set(new Date());
   });
-
   const weatherSignal = getSignal("weather", {temp: 0, sunset: 0, sunrise: 0}).every(time.hour, (signal) => {
     return getWeatherData()
       .then(weather => {

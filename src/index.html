@@ -10,6 +10,7 @@
     <link href='https://fonts.googleapis.com/css?family=Patrick+Hand' rel='stylesheet' type='text/css'>
 
     <script src="vendor/custom-element.js"></script>
+    <script src="vendor/fetch.js"></script>
     <script src="vendor/traceur.js"></script>
     <script src="vendor/es6-module-loader.js"></script>
     <script src="vendor/markdown.js"></script>
@@ -18,20 +19,20 @@
     <div class="g-container">
       <div class="row">
         <div class="col col-xs-6 widget">
-          <s-weather weather="SIGNAL::weather">
+          <s-weather weather="SIGNAL::weather">loading weather data...</s-weather>
         </div>
         <div class="col col-xs-6 widget">
-          <s-time date="SIGNAL::time">
+          <s-time date="SIGNAL::time"></s-time>
         </div>
       </div>
       <div class="bottom">
         <div class="row">
           <div class="col col-xs-6 widget">
-            <s-list items='["foo","bar"]' item="<s-item item={item}></s-item>">dummy</s-list>
-            <s-birthdays birthdays="SIGNAL::birthdays">
+            <s-list items='["foo","bar"]' item="<s-item item={item}></s-item>"></s-list>
+            <s-birthdays birthdays="SIGNAL::birthdays">loading birthdays...</s-birthdays>
           </div>
           <div class="col col-xs-6 widget">
-            <s-notes notes="SIGNAL::notes">
+            <s-notes notes="SIGNAL::notes">loading notes...</s-notes>
           </div>
         </div>
       </div>
