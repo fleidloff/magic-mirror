@@ -2,13 +2,7 @@ import register, { getSignal } from "../stupidComponent.js";
 
 register("s-list", ({ items, render, item, innerHTML }) => {
   const element = innerHTML || item;
-  if (typeof element === "string") {
-    try {
-      items = JSON.parse(items);
-    } catch (e) {
-      items = [items]; 
-    }
-  }
+  items = (typeof items.push === "function") ? items : [items]; 
   if (render) {
     return items.map(render).join("");
   }

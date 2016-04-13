@@ -8,6 +8,7 @@ import { getSignal } from "js/stupidComponent.js";
 import time from "js/time.js";
 
 export default function main() {
+  getSignal("items", ["foo","bar"]);
   const timestampSignal = getSignal("time").every(time.second, (signal) => {
     signal.set(new Date());
   });
